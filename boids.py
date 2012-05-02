@@ -2,11 +2,11 @@ from random import *
 from math   import *
 
 size(320,180)
-speed(50)
+speed(20)
 
 
 boids=[]
-dt = 1.0 #/30
+dt = 2.0 #/30
 v0 = 3.0
 
 for i in range(0,30):
