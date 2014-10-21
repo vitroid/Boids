@@ -1,15 +1,15 @@
 from random import *
 from math   import *
 
-size(320,180)
-speed(20)
+size(320,320)
+speed(30)
 
 
 boids=[]
 dt = 2.0 #/30
-v0 = 3.0
-
-for i in range(0,30):
+v0 = 3
+repul = 0.3 #repulstion against the wall
+for i in range(0,3):
     boids.append([WIDTH*random(),HEIGHT*random(),150.0,v0*(random()-0.5),v0*(random()-0.5),random()-0.5])
 
 
@@ -22,7 +22,7 @@ def snapshot(boids):
         stroke(0.6, 0.4, 1-abs(vz/v0))
         strokewidth( z / 60.0 )
         line(x,y,x-vx*5,y-vy*5)
-    
+        break
 
 
 def proceed(boids, dt, v0):
@@ -102,17 +102,17 @@ def proceed(boids, dt, v0):
         z  = z + vz * dt
         vg = 0.5
         if x < 50.0:
-            vx += vg
+            vx += vg * repul
         if WIDTH-50.0 < x:
-            vx -= vg
+            vx -= vg * repul
         if y < 50.0:
-            vy += vg
+            vy += vg * repul
         if HEIGHT-50.0 < y:
-            vy -= vg
+            vy -= vg * repul
         if z < 100.0:
-            vz += vg
+            vz += vg * repul
         if 300.0 < z:
-            vz -= vg
+            vz -= vg * repul
         newboids.append([x,y,z,vx,vy,vz])
     return newboids
 
